@@ -8,16 +8,16 @@ class LiveViewNode(Node):
     def __init__(self):
         super().__init__('live_view_node')
         
-        # Subscribe to the /in topic
+        # Subscribe to the /img topic
         # Depth 10 handles the 'bunch of images' stream efficiently
         self.subscription = self.create_subscription(
             Image,
-            '/in',
+            '/img',
             self.listener_callback,
             10)
         
         self.bridge = CvBridge()
-        self.get_logger().info('Live view started. Subscribed to /in')
+        self.get_logger().info('Live view started. Subscribed to /img')
 
     def listener_callback(self, msg):
         try:
@@ -25,7 +25,7 @@ class LiveViewNode(Node):
             frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
             
             # Open a window and show the frame
-            cv2.imshow("ROS2 Live Stream: /in", frame)
+            cv2.imshow("ROS2 Live Stream: /img", frame)
             
             # waitKey(1) is required to actually render the window
             # If you press 'q' while the window is focused, it will close
