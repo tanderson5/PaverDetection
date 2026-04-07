@@ -17,7 +17,7 @@ import cv2 as cv
 import time
 
 from detection import process_frame
-from visualization import draw_paver, draw_hud
+from visualization import draw_paver
 
 
 class PaverDetectionNode(Node):
@@ -76,7 +76,7 @@ class PaverDetectionNode(Node):
         fps = 1.0 / max(now - self._prev_time, 1e-6)
         self._prev_time = now
 
-        draw_hud(frame, paver_count=len(pavers), fps=fps)
+        
 
         # --- Log paver count at INFO level (not every frame — throttled) ---
         if self._frame_count % 30 == 0:
