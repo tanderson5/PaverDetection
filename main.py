@@ -24,7 +24,7 @@ import time
 import cv2 as cv
 
 from detection import process_frame
-from visualization import draw_paver, draw_hud
+from visualization import draw_paver
 
 
 # --------------------------
@@ -49,7 +49,7 @@ def run_image(image_path):
         )
         print(f"Paver @ {pose['centroid']}  angle={pose['orientation_angle']:.2f} deg")
 
-    draw_hud(image, paver_count=len(pavers))
+    
     cv.imwrite("pose_detected.jpg", image)
     print(f"[INFO] Saved pose_detected.jpg  ({len(pavers)} paver(s) found)")
 
@@ -96,7 +96,7 @@ def run_live(camera_index=0, video_path=None):
         fps = 1.0 / max(now - prev_time, 1e-6)
         prev_time = now
 
-        draw_hud(frame, paver_count=len(pavers), fps=fps)
+        
         cv.imshow("Paver Detection (live)", frame)
 
         key = cv.waitKey(1) & 0xFF
